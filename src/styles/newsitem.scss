@@ -1,0 +1,202 @@
+@import "../styles/globals.scss";
+@import "../styles/fonticons";
+
+.newsitem {
+  @include defaulttransition();
+
+  z-index: 1;
+  display: block;
+  position: relative;
+  min-width: 100px;
+  min-height: 200px;
+  margin: 80px 10px 80px;
+  overflow: hidden;
+  padding-bottom: 80px;
+  border-bottom: 1px solid #f7f7f7;
+
+  &.loading {
+    min-height: 200px;
+  }
+
+  a.overlay {
+    z-index: 10;
+    position: absolute;
+    width: 100%;
+    height: calc(100% - 100px);
+  }
+
+  .tile-image {
+    overflow: hidden;
+  }
+
+  img {
+    @include defaulttransition();
+    -webkit-transform: scale(1);
+    -moz-transform: scale(1);
+    -ms-transform: scale(1);
+    -o-transform: scale(1);
+    transform: scale(1);
+
+    &[src="http://www.engraversnetwork.com/files/placeholder.jpg"] {
+      display: none;
+    }
+
+    opacity:0;
+    border-radius: $border-radius;
+    width: 100%;
+  }
+  img.loaded {
+    opacity: 1;
+  }
+
+
+  header {
+    @include defaulttransition();
+
+    text-align: left;
+    margin: 15px;
+
+    .title {
+      display: block;
+      text-decoration: none;
+      letter-spacing: 0px;
+      font-family: "Futura",sans-serif;
+
+      font-size: 30px;
+      margin-bottom: 20px;
+      color: #333;
+
+      &:hover {
+        //text-decoration: underline;
+      }
+    }
+
+    .summary {
+      font-weight: 100;
+      overflow: hidden;
+      line-height: 26px;
+      margin-bottom: 25px;
+      font-size: 16px;
+      color: $summary-color;
+      font-family: 'Varela', sans-serif;
+    }
+
+    .meta {
+      font-family: "Futura",sans-serif;
+      font-size: 14px;
+      margin-left: 0px !important;
+
+      .host {
+        padding-right: 16px;
+        color: $salomon;
+        text-decoration: none;
+      }
+
+      .sep {
+        margin: 0 15px;
+      }
+
+      .diff {
+        color: $summary-color;
+      }
+
+      .share {
+        @include specTransition(color, opacity);
+
+        float: right;
+        color: #969696;
+        font-size: 20px;
+        opacity: 0;
+        text-decoration: none;
+        margin: 0 10px;
+
+        &:hover {
+          color: $salomon !important;
+          cursor: pointer;
+        }
+
+
+        &.icon-cross {
+         // margin-top: -2px;
+        }
+      }
+
+      .share.general {
+        color: black;
+        margin-left: 15px;
+        margin-right: 20px;
+      }
+
+      .share.twitter:hover {
+        color: $twitter-color !important;
+      },
+
+
+      .share.facebook:hover {
+        color: $facebook-color !important;
+      },
+
+      .share.pocket:hover {
+        color: $pocket-color !important;
+      }
+    }
+  }
+
+  &:hover {
+
+
+    .title {
+      @include defaulttransition();
+
+      color: $salomon;
+    }
+
+    .summary {
+      @include defaulttransition();
+      //color: #CCC;
+    }
+  }
+
+
+  &:hover img {
+    -webkit-transform: scale(1.06);
+    -moz-transform: scale(1.06);
+    -ms-transform: scale(1.06);
+    -o-transform: scale(1.06);
+    transform: scale(1.06);
+    -webkit-transition-duration: 5s;
+    -moz-transition-duration: 5s;
+    -ms-transition-duration: 5s;
+    -o-transition-duration: 5s;
+    transition-duration: 5s;
+  }
+
+  &:hover header .meta .share  {
+    opacity: 1;
+  }
+}
+
+.newsitem.list {
+
+
+  .tile-image {
+    display: inline-block;
+    min-width: 200px;
+    max-width: 300px;
+    width: 16%;
+    margin-right: 30px;
+  }
+
+  header {
+    width: 65%;
+    display: inline-block;
+    vertical-align: top;
+    margin: 0 40px 0 15px;
+
+    .title {
+      font-size: 30px;
+    }
+  }
+
+
+}

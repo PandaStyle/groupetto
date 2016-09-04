@@ -1,0 +1,61 @@
+@import "normalize";
+@import "nprogress";
+
+
+
+//@import "fontstyle";
+@import "globals";
+@import "salvattore";
+
+
+@import "inspiration";
+@import "responsive";
+
+body{
+  background-color: #fff;
+}
+
+.container {
+
+  &.news {
+    max-width: 960px;
+    margin: 30px auto;
+  }
+
+  &.inspiration,
+  &.instagram{
+    margin: 70px 30px 70px 100px;
+  }
+
+  @media screen and (max-width: 775px) {
+    &.inspiration,
+    &.instagram {
+      margin: 70px 10px 70px 80px;
+    }
+  }
+}
+
+
+
+
+
+
+#nprogress .peg {
+  box-shadow: none;
+}
+
+#nprogress .bar {
+background-color: $salomon;
+height: 4px;
+}
+#nprogress .spinner-icon {
+border-top-color: $salomon;
+border-left-color: $salomon;
+}
+
+
+
+
+
+
+

@@ -1,0 +1,44 @@
+/* Large Devices, Wide Screens */
+@media only screen and (max-width : 1200px) {
+  .container.news {
+    margin: 30px 30px 30px 100px !important;
+  }
+}
+
+/* Medium Devices, Desktops */
+@media only screen and (max-width : 992px) {
+  .newsitem {
+    header {
+      width: 54% !important;
+    }
+
+    .title {
+      font-size: 24px !important;
+    }
+    .summary {
+      font-size: 14px !important;
+      line-height: 22px !important;
+      margin-bottom: 18px !important;
+    }
+  }
+}
+
+/* Small Devices, Tablets */
+@media only screen and (max-width : 768px) {
+  .newsitem {
+    header {
+      margin: 10px 0 0 0 !important;
+      width: 100% !important;
+    }
+  }
+}
+
+/* Extra Small Devices, Phones */
+@media only screen and (max-width : 480px) {
+
+}
+
+/* Custom, iPhone Retina */
+@media only screen and (max-width : 320px) {
+
+}

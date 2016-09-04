@@ -1,0 +1,178 @@
+@import "globals";
+@import "burger";
+@import "flaticon";
+
+.sidebar {
+  @include defaulttransition();
+
+  z-index: 10;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  width: 70px;
+  background: $navbar-color;
+
+  display: flex;
+  flex-direction: column;
+  align-content: flex-start;
+
+  .logo-wrapper {
+    z-index: 1000;
+    width: 70px;
+    height: 70px;
+    background-color: $salomon;
+    //background-image: $gradient;
+    background-image: -webkit-linear-gradient(329deg,#f16f55 33%,#cd5d67);
+    background-image: linear-gradient(128deg,#f16f55 33%,#cd5d67);
+
+    svg {
+      margin: 15px;
+
+      .path {
+        fill: $white;
+      }
+    }
+  }
+
+  .logo-wrapper.active {
+    display: none;
+    background-color: transparent;
+    svg .path {
+      fill: $salomon;
+    }
+  }
+
+
+  .item {
+    width: 100%;
+    text-align: center;
+
+    &.content {
+      position: relative;
+      //overflow: auto;
+      // We use .flex instead of .flex-grow here because IE10 does
+      // not support flex-grow.
+      flex: auto;
+
+      .menu {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        left: 0;
+
+        display : flex;
+        flex-direction: column;
+        justify-content: center;
+
+        //display: none;
+        .menu-item {
+          @include defaulttransition();
+
+          width: 70px;
+          text-decoration: none;
+          position: relative;
+
+          background-position: center;
+          background-size: contain;
+          background-repeat: no-repeat;
+
+          border-left: 3px solid $sidebar-grey;
+
+          line-height: 40px;
+
+          margin-bottom: 10px;
+
+          .menu-icon {
+            float: left;
+            color: $menu-item-grey;
+            font-size: 30px;
+            padding: 15px 15px;
+          }
+
+          .menu-title {
+            //text-transform: uppercase;
+            font-family: "Futura", sans-serif;
+            font-size: 20px;
+            color: white !important;
+            //font-weight: bold;
+            position: absolute;
+            //top: 10px;
+            left: 0;
+            top: 13px;
+            opacity: 0;
+            color: #444;
+          }
+
+          &:hover {
+            @include defaulttransition();
+           // background-color: $salomon;
+            background-image: $gradient;
+            border-color: $salomon;
+            width: 160px;
+
+            .menu-title {
+              transition-delay: .2s;
+              opacity: 1;
+              left: 80px;
+            }
+
+            .menu-icon {
+              color: white;
+            }
+          }
+
+          &.insp:hover {
+            width:170px;
+          }
+
+          &.v-link-active {
+            border-color: $salomon;
+            .menu-icon {
+              color: #fff;
+            }
+          }
+
+          &.instagram:hover {
+            width:200px;
+          }
+
+        }
+      }
+    }
+
+  }
+
+  & + .blackLayer {
+    @include specTransition(opacity);
+    background-color: #000;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    opacity: 0;
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  &.open {
+    width: 300px;
+
+    .logo-wrapper {
+      margin: 10px auto 0;
+    }
+
+    &.wide {
+      min-width: 600px;
+    }
+
+    & + .blackLayer {
+      pointer-events: all;
+      opacity: .5;
+    }
+  }
+
+}
+
+

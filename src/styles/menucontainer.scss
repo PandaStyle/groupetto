@@ -1,0 +1,101 @@
+@import "globals";
+.menu-container {
+  text-align: left;
+  position: absolute;
+  top: 60px;
+
+
+  ul {
+    position: relative;
+    float: left;
+    padding-left: 20px;
+
+    &.border {
+
+    }
+
+    li {
+      font-size: 3rem;
+      vertical-align: baseline;
+      list-style: none;
+      margin: 10px 0;
+
+      a {
+        font-family: "Futura", sans-serif;
+        color: $menu-item-white;
+        text-decoration: none;
+        text-rendering: geometricPrecision;
+        will-change: transform;
+
+
+        &:hover {
+          color: $dark-grey;
+          cursor: pointer;
+        }
+      }
+
+      .bordered {
+        @include defaulttransition();
+        position: relative;
+
+        &:after {
+          height: 3px;
+          width: 0;
+          display: block;
+          background: #17191c;
+          content: "";
+          position: absolute;
+          left: 0;
+          bottom: -3px;
+        }
+
+        &:hover:after {
+          @include defaulttransition();
+          width: 100%;
+          background: $dark-grey;
+        }
+
+        &.active:after {
+          width: 100%;
+          background: $dark-grey;
+        }
+        &.active {
+          color: $dark-grey;
+        }
+
+      }
+
+      .suggest {
+        background: none;
+        border: none;
+        border-radius: 100%;
+        outline: 0;
+        border: 0;
+
+        &:focus, &:active {
+          background: none;
+          border: none;
+        }
+      }
+
+    }
+
+    li.layout {
+      .layout-selector {
+        position: relative;
+        margin-left: 250px;
+      }
+    }
+
+  }
+
+  .menucontent {
+    float: left;
+    position: absolute;
+    top: 0;
+    padding: 0 0 0 80px;
+    display: inline-block;
+    max-width: 600px;
+  }
+
+}

@@ -1,0 +1,30 @@
+@import "../styles/globals.scss";
+
+.mapitem {
+  width: 250px;
+  float: left;
+
+  img {
+    border: 2px solid white;
+    opacity: 0.9;
+  }
+
+  &.selected {
+    img.staticmap {
+      border: 2px solid $salomon;
+      opacity: 1;
+    }
+    .name {
+      color: $salomon;
+    }
+  }
+  &:hover img.staticmap {
+    border: 2px solid $salomon;
+    opacity: 1;
+  }
+
+  &:hover .name {
+    color: $salomon;
+  }
+
+}
