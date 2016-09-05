@@ -3,6 +3,7 @@
         <div class="modal-container" @click.stop>
             <div class="modal-header">
                 <h3>Select who you would like to ride with</h3>
+                <img v-bind:src="item.profile_medium" alt="" v-for="item in selectedathletes">
             </div>
 
             <div class="modal-body">
@@ -11,12 +12,15 @@
                    <span @click="setSelectedTab('search')">Search for athletes</span>
                </div>
                <div class="routes">
-                  
-                   <athlete-item v-show="selectedTab == 'following'"
-                             @click="addAthlete(item)"
-                             v-for="item in followingAthletes"
-                             :item="item">
-                   </athlete-item>
+                   <div v-show="selectedTab == 'following'">
+                       <input type="text" v-model="searchName">
+                       <athlete-item
+                                     @click="addAthlete(item)"
+                                     v-for="item in filteredItems"
+                                     :item="item">
+                       </athlete-item>
+                   </div>
+
                    
                    <div v-show="selectedTab == 'search'">
                        Search for athletes
@@ -37,7 +41,7 @@
     import AthleteItem from "./AthleteItem.vue";
 
     export default {
-        props: ['show'],
+        props: ['show', 'selectedathletes'],
         components: {
             AthleteItem
         },
@@ -45,10 +49,14 @@
             return {
                 selectedTab: null,
                 followingAthletes: null,
-                selectedAthletes: null,
-                selecteAthletes: [],
                 title: '',
-                body: ''
+                body: '',
+                searchName: ''
+            }
+        },
+        computed: {
+            filteredItems: function () {
+                return this.$options.filters.filterBy(this.followingAthletes, this.searchName);
             }
         },
         methods: {
@@ -60,7 +68,7 @@
                this.selectedRouteId = item.id;
             },
             addAthlete(a){
-                selecteAthletes.push(a)
+                this.selectedathletes.push(a)
             },
             close: function () {
                 this.show = false;

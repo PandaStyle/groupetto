@@ -22,9 +22,26 @@
     }
 </script>
 
-<style lang="sass">
-    @import "../styles/stravaitem.scss";
-    @import "../styles/mapitem.scss";
+<style lang="sass" scoped>
+
+    .athleteItem {
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+
+    .profile-img {
+        float: left;
+        margin-right: 10px;
+    }
+
+    .name {
+        display: inline-block;
+    }
+
+    button.add {
+        display: inline-block;
+        margin: 10px;
+    }
 
 </style>
 

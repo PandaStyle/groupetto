@@ -1,49 +1,78 @@
-<template >
-    <div class="event-list">
+<template>
+   <h1>Create Event</h1>
 
+    <div class="formelem">
+        <fieldset class="form-fieldset ui-input __first">
+            <input type="text" v-model="title" id="name"  tabindex="0" />
+            <label for="name">
+                <span data-text="Name">Name</span>
+            </label>
+        </fieldset>
+    </div>
 
-   <h1>Create Events</h1>
- <!--   <event-item
-            class="even"
-            v-for="item in items"
-            :item="item">
-    </event-item>-->
-        <div class="title">
-            Title:
-            <input type="text"/>
+    <div class="formelem">
+        <div class="datepicker-holder">
+        <fieldset class="form-fieldset ui-input __first">
+            <input type="text" v-model="testTime" id="starttime"  tabindex="0" />
+
+            <label for="starttime">
+                <span data-text="Start time">Start time</span>
+            </label>
+        </fieldset>
+        <date-picker id="starttime" :time.sync="testTime" :option="timeoption"></date-picker>
         </div>
-        <div class="card">
-            <div class="row">
-                <span>Start time：</span>
-                <date-picker :time.sync="testTime" :option="timeoption"></date-picker>
-            </div>
-        </div>
-        <div class="tyoe">
-            Type:
-            <select>
-                <option value="leasue">leasue</option>
-                <option value="groupride">groupride</option>
-                <option value="training">training</option>
-            </select>
-        </div>
+    </div>
+
+    <div class="formelem">
+        <fieldset class="form-fieldset ui-input __first">
+            <input type="text" v-model="meetingpoint" id="meetingpoint"  tabindex="0" />
+            <label for="name">
+                <span data-text="Meeting point">Meeting Point</span>
+            </label>
+        </fieldset>
+    </div>
+
+    <div class="formelem">
+        <fieldset class="form-fieldset ui-input __first">
+            <input type="text" v-model="description" id="desc"  />
+            <label for="desc">
+                <span data-text="description">description</span>
+            </label>
+        </fieldset>
+    </div>
+
+    <div class="formelem">
         <div class="route">
-            Select route:
-            <modal :show.sync="showModal"></modal>
+            <span class="halfgrey">ROUTE</span>
+            <modal :selectedrouteid.sync="selectedRoute" :show.sync="showModal"></modal>
             <button id="show-modal" @click="showModal = true">Select Route</button>
         </div>
+    </div>
+
+    <div class="formelem">
         <div class="route">
             Invite poeple to join:
             <participants-modal  :selectedathletes.sync="participants" :show.sync="showAthleteModal"></participants-modal>
             <button  @click="showAthleteModal = true">Select People</button>
         </div>
-        <span v-for="p in participants">{{p.firstname}}</span>
-        <div class="description">
-            Description:
-            <textarea name="desc" id="" cols="30" rows="10"></textarea>
+    </div>
+
+
+
+    <div class="formelem">
+        <div class="type" >
+            Type:
+            <select v-model="type">
+                <option value="leasue">leasue</option>
+                <option value="groupride">groupride</option>
+                <option value="training">training</option>
+            </select>
         </div>
+    </div>
+
+    <div class="formelem">
         <span>Private</span>
-        <input type="checkbox">
-        
+        <input type="checkbox" v-model="isPrivate">
     </div>
 
     <div class="submit-row">
@@ -73,10 +102,18 @@
 
         data () {
             return {
-                items: null,
+                title: null,
+                type: null,
+                description: null,
+                isPrivate: null,
+                meetingpoint: null,
+                participants: [],
+                selectedRoute: 'default',
+
                 showModal: false,
                 showAthleteModal: false,
-                participants: [],
+
+
                 dataPropWithPlaceString: "",
                 starttime: '',
                 endtime: '2016-01-19',
@@ -133,27 +170,6 @@
             }
         },
 
-        route: {
-            data (transition) {
-                this.apiURL = Config.API_URL + "events";
-
-                this.$http.get(this.apiURL, function (results, status, request) {
-
-                    console.log(results)
-                    transition.next({items: results});
-
-                }).error(function (data, status, request) {
-                    throw (data);
-                })
-            }
-        },
-
-       ready () {
-
-
-
-       },
-
         methods: {
             loadMore () {
                 console.log("loadmore");
@@ -161,6 +177,7 @@
 
             saveEvent () {
                 var event = {
+
                     creatorId: '1234',
                     title: this.title,
                     date: this.testTime,
@@ -181,7 +198,40 @@
 </script>
 
 <style>
+    @import '../styles/form.scss';
     .event-list {
         margin-left: 100px;
     }
+
+.cov-vue-date {
+    position: absolute;
+    top:0;
+    width: 100%;
+}
+
+.cov-datepicker {
+    height: 54px;
+    width: 100%;
+    z-index: 10;
+    border: none;
+    font-size: 24px;
+    color: black;
+}
+    
+    .datepicker-holder {
+        position: relative;
+
+
+    }
+
+    .halfgrey {
+        position: relative;
+        color: rgba(0, 0, 0, 0.5);
+        transition: color 300ms cubic-bezier(0.215, 0.61, 0.355, 1);
+    }
+
+    .formelem {
+        margin-bottom: 20px;
+    }
+
 </style>
