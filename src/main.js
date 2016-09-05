@@ -36,6 +36,9 @@ router.map({
   },
   '/events/create': {
     component: CreateEvent
+  },
+  '/events': {
+    component: Events
   }
 });
 

@@ -1,9 +1,9 @@
 <template>
    <h1>Create Event</h1>
-
+    <form action="" v-on:submit.prevent>
     <div class="formelem">
         <fieldset class="form-fieldset ui-input __first">
-            <input type="text" v-model="title" id="name"  tabindex="0" />
+            <input type="text" v-model="title" id="name"  tabindex="0" required/>
             <label for="name">
                 <span data-text="Name">Name</span>
             </label>
@@ -44,20 +44,14 @@
     <div class="formelem">
         <div class="route">
             <span class="halfgrey">ROUTE</span>
-            <modal :selectedrouteid.sync="selectedRoute" :show.sync="showModal"></modal>
+            <map-item v-if="selectedRoute"
+                      class="mapitem"
+                      :item="selectedRoute">
+            </map-item>
+            <modal :selectedroute.sync="selectedRoute" :show.sync="showModal"></modal>
             <button id="show-modal" @click="showModal = true">Select Route</button>
         </div>
     </div>
-
-    <div class="formelem">
-        <div class="route">
-            Invite poeple to join:
-            <participants-modal  :selectedathletes.sync="participants" :show.sync="showAthleteModal"></participants-modal>
-            <button  @click="showAthleteModal = true">Select People</button>
-        </div>
-    </div>
-
-
 
     <div class="formelem">
         <div class="type" >
@@ -70,14 +64,25 @@
         </div>
     </div>
 
+
+    <div class="formelem">
+        <div class="invite">
+            Invite poeple to join:
+            <div class="participant" v-for="p in participants"><span>{{p.firstname}}</span></div>
+            <participants-modal  :selectedathletes.sync="participants" :show.sync="showAthleteModal"></participants-modal>
+            <button  @click="showAthleteModal = true">Select People</button>
+        </div>
+    </div>
+
     <div class="formelem">
         <span>Private</span>
         <input type="checkbox" v-model="isPrivate">
     </div>
 
     <div class="submit-row">
-        <button>Submit</button>
+        <button @click="saveEvent" type="submit">Submit</button>
     </div>
+    </form>
 </template>
 
 
@@ -88,16 +93,18 @@
     import places from 'places.js'
     import Modal from './Modal.vue'
     import ParticipantsModal from './ParticipantsModal.vue'
+    import MapItem from "./MapItem.vue";
 
 
    export default {
-        name: 'Events',
+        name: 'CreateEvent',
 
         components: {
             EventItem,
             'date-picker': myDatepicker,
             Modal,
-            ParticipantsModal
+            ParticipantsModal,
+            MapItem
         },
 
         data () {
@@ -108,7 +115,7 @@
                 isPrivate: null,
                 meetingpoint: null,
                 participants: [],
-                selectedRoute: 'default',
+                selectedRoute: null,
 
                 showModal: false,
                 showAthleteModal: false,
@@ -177,21 +184,22 @@
 
             saveEvent () {
                 var event = {
-
                     creatorId: '1234',
                     title: this.title,
                     date: this.testTime,
-
+                    description: this.description,
+                    meetingPoint: this.meetingpoint,
                     type: this.type,
-                    routeId: String,
-
-                    participants: [],
-                    private: Boolean,
-
-                    description: String
+                    participants: this.participants,
+                    private: this.isPrivate,
+                    route: this.selectedRoute
                 }
 
-
+                this.$http.post(Config.API_URL + 'events', event, results => {
+                    console.log(results.result)
+                }).error( err => {
+                    throw (err);
+                })
             }
         }
     }

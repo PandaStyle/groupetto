@@ -7,14 +7,14 @@ var eventSchema = new Schema({
     creatorId: String,
     title: { type: String, required: true },
     date: { type: Date, default: Date.now },
-
+    description: String,
+    meetingPoint: String,
     type: String,
-    routeId: String,
-
     participants: [],
     private: Boolean,
+    route: Object,
 
-    description: String
+
 });
 
 var Event = mongoose.model('Event', eventSchema);

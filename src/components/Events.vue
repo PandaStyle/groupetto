@@ -2,53 +2,13 @@
     <div class="event-list">
 
 
-   <h1>Create Events</h1>
- <!--   <event-item
+   <h1>List Events</h1>
+  <event-item
             class="even"
             v-for="item in items"
             :item="item">
-    </event-item>-->
-        <div class="title">
-            Title:
-            <input type="text"/>
-        </div>
-        <div class="card">
-            <div class="row">
-                <span>Start time：</span>
-                <date-picker :time.sync="testTime" :option="timeoption"></date-picker>
-            </div>
-        </div>
-        <div class="tyoe">
-            Type:
-            <select>
-                <option value="leasue">leasue</option>
-                <option value="groupride">groupride</option>
-                <option value="training">training</option>
-            </select>
-        </div>
-        <div class="route">
-            Select route:
-            <modal :show.sync="showModal"></modal>
-            <button id="show-modal" @click="showModal = true">Select Route</button>
-        </div>
-        <div class="route">
-            Invite poeple to join:
-            <participants-modal  :selectedathletes.sync="participants" :show.sync="showAthleteModal"></participants-modal>
-            <button  @click="showAthleteModal = true">Select People</button>
-        </div>
-        <span v-for="p in participants">{{p.firstname}}</span>
-        <div class="description">
-            Description:
-            <textarea name="desc" id="" cols="30" rows="10"></textarea>
-        </div>
-        <span>Private</span>
-        <input type="checkbox">
-        
-    </div>
-
-    <div class="submit-row">
-        <button>Submit</button>
-    </div>
+    </event-item>
+      </div>
 </template>
 
 
@@ -73,63 +33,7 @@
 
         data () {
             return {
-                items: null,
-                showModal: false,
-                showAthleteModal: false,
-                participants: [],
-                dataPropWithPlaceString: "",
-                starttime: '',
-                endtime: '2016-01-19',
-                testTime: '',
-                multiTime: '',
-                option: {
-                    type: 'day',
-                    week: ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'],
-                    month: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-                    format: 'YYYY-MM-DD',
-                    placeholder: 'when?',
-                    inputStyle: {
-                        'display': 'inline-block',
-                        'padding': '6px',
-                        'line-height': '22px',
-                        'font-size': '16px',
-                        'border': '2px solid #fff',
-                        'box-shadow': '0 1px 3px 0 rgba(0, 0, 0, 0.2)',
-                        'border-radius': '2px',
-                        'color': '#5F5F5F'
-                    },
-                    color: {
-                        header: '#ccc',
-                        headerText: '#f00'
-                    },
-                    buttons: {
-                        ok: 'Ok',
-                        cancel: 'Cancel'
-                    },
-                    overlayOpacity: 0.5, // 0.5 as default
-                    dismissible: true // as true as default
-                },
-                timeoption: {
-                    type: 'min',
-                    week: ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'],
-                    month: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-                    format: 'YYYY-MM-DD HH:mm'
-                },
-                multiOption: {
-                    type: 'multi-day',
-                    week: ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'],
-                    month: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-                    format:"YYYY-MM-DD HH:mm"
-                },
-                limit: [{
-                    type: 'weekday',
-                    available: [1, 2, 3, 4, 5]
-                },
-                    {
-                        type: 'fromto',
-                        from: '2016-02-01',
-                        to: '2016-02-20'
-                    }]
+                items: null
             }
         },
 

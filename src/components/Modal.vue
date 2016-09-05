@@ -12,14 +12,14 @@
                </div>
                <div class="routes">
                    <map-item v-show="selectedTab == 'myroutes'"
-                             v-bind:class="{'selected' : selectedrouteid == item.id }"
+                             v-bind:class="{'selected' : selectedroute == item }"
                              @click="setSelectedRoute(item)"
                              class="mapitem"
                              v-for="item in myrouteitems"
                              :item="item">
                    </map-item>
                    <map-item v-show="selectedTab == 'myactivities'"
-                             v-bind:class="{'selected' : selectedrouteid == item.id }"
+                             v-bind:class="{'selected' : selectedroute == item }"
                              @click="setSelectedRoute(item)"
                              class="mapitem"
                              v-for="item in myactivityitems"
@@ -43,7 +43,7 @@
     import MapItem from "./MapItem.vue";
 
     export default {
-        props: ['show', 'selectedrouteid'],
+        props: ['show', 'selectedroute'],
         components: {
             MapItem
         },
@@ -62,7 +62,7 @@
                 this.selectedTab = t;
             },
             setSelectedRoute(item) {
-               this.selectedrouteid = item.id;
+               this.selectedroute = item;
             },
             close: function () {
                 this.show = false;
