@@ -26,6 +26,7 @@ server.connection({
 });
 
 
+
 server.state('strava_access_token', {
     ttl: 24 * 60 * 60 * 1000,     // One day
     encoding: 'base64json',
@@ -66,7 +67,7 @@ server.route({
             if(err)
                 throw err;
 
-            reply(res).state('strava_access_token', res.access_token).redirect("/#/strava")
+            reply(res).state('strava_access_token', res.access_token).redirect("/")
         })
     }
 });
@@ -145,7 +146,7 @@ server.route({
     path:'/strava/me',
     handler: function (request, reply) {
         console.log(request.state)
-        strava.athlete({'access_token': request.state.strava_access_token},function(err,payload) {
+        strava.athlete.get({'access_token': request.state.strava_access_token},function(err,payload) {
             if(!err) {
                 reply(payload);
             }

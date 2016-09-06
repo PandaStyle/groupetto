@@ -1,5 +1,6 @@
 <template >
-   <a href="https://www.strava.com/oauth/authorize?client_id=1016&response_type=code&redirect_uri=http://localhost:8082/strava/tokenexchange&scope=write" class="connect"> </a>
+   <h1>Log in with strava!</h1>
+   <a href="https://www.strava.com/oauth/authorize?client_id=1016&response_type=code&redirect_uri=http://www.ridegruppetto.com:8081/strava/tokenexchange&scope=write" class="connect"> </a>
 </template>
 
 

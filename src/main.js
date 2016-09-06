@@ -32,8 +32,8 @@ var router = new Router({
 });
 
 router.map({
-  '/strava': {
-    component: document.cookie.indexOf("strava_access_token") >= 0 ? StravaMain : StravaLogin
+  '/login': {
+    component: StravaLogin
   },
   '/events': {
     component: Events
