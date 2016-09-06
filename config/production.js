@@ -1,4 +1,4 @@
 module.exports = {
     env: "production",
-    API_URL: "http://localhost:8081/"
+    API_URL: "http://www.ridegruppetto.com:8081/"
 };

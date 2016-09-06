@@ -5,7 +5,7 @@ var Event = require('./models/Event')
 var mongoose = require('mongoose');
 var cloudinary = require('cloudinary');
 
-var redirect_uri = 'http://localhost:8081/handleauth';
+var redirect_uri = process.env.NODE_ENV === 'production' ?  'http://www.ridegruppetto.com:8081/handleauth' : 'http://localhost:8081/handleauth';
 
 mongoose.Promise = require('bluebird');
 mongoose.connect('mongodb://127.0.0.1:27017/test');
@@ -259,7 +259,8 @@ server.route({
     method: 'GET',
     path:'/ping',
     handler: function (request, reply) {
-        reply("pong hahaha");
+        var e = process.env.NODE_ENV;
+        reply({"pong hahaha, NODE_ENV value:" : e});
     }
 });
 
