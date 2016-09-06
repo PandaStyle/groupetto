@@ -50,6 +50,7 @@
     "places.js": "^1.4.3",
     "strava-v3": "^1.10.0",
     "vue": "^1.0.8",
+    "vue-datepicker": "^1.2.2",
     "vue-mdl": "^0.9.4",
     "vue-multiselect": "^1.1.2",
     "vue-resource": "^0.1.17",
