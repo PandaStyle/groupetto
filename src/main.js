@@ -35,7 +35,7 @@ router.map({
   '/login': {
     component: StravaLogin
   },
-  '/events': {
+  '/': {
     component: Events
   },
   '/events/create': {
@@ -46,6 +46,13 @@ router.map({
   }
 });
 
+router.beforeEach((transition) => {
+  if (transition.to.path != '/login' && document.cookie.indexOf("strava_access_token") < 0 ) {
+      transition.redirect('/login')
+  } else {
+    transition.next()
+  }
+})
 
 router.start(App, '#app', function () {
 
