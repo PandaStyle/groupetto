@@ -3,11 +3,19 @@ var Inert = require('inert');
 var strava = require('strava-v3');
 var Event = require('./models/Event')
 var mongoose = require('mongoose');
+var cloudinary = require('cloudinary');
 
 var redirect_uri = 'http://localhost:8081/handleauth';
 
 mongoose.Promise = require('bluebird');
 mongoose.connect('mongodb://127.0.0.1:27017/test');
+
+// Setup
+cloudinary.config({
+    cloud_name: 'grupetto',
+    api_key: '677869975664931',
+    api_secret: 'zRYHLql9pmgK-uQzm2InXvWpZhY'
+});
 
 // Create a server with a host and port
 var server = new Hapi.Server();
@@ -16,8 +24,6 @@ server.connection({
     port: 8081,
     routes: { cors: true } 
 });
-
-
 
 
 server.state('strava_access_token', {
@@ -134,6 +140,23 @@ server.route({
 });
 
 
+server.route({
+    method: 'GET',
+    path:'/strava/me',
+    handler: function (request, reply) {
+        console.log(request.state)
+        strava.athlete({'access_token': request.state.strava_access_token},function(err,payload) {
+            if(!err) {
+                reply(payload);
+            }
+            else {
+                console.error(err);
+                throw err;
+            }
+        });
+    }
+});
+
 
 server.route({
     method: 'GET',
@@ -241,7 +264,16 @@ server.route({
 });
 
 
-
+server.route({
+    method: 'POST',
+    path:'/images/upload',
+    handler: function (request, reply) {
+        cloudinary.uploader.upload(request.payload.image, function (result) {
+            console.log(result)
+            reply(result);
+        });
+    }
+});
 
 server.start(function (err) {
     if (err) {

@@ -1,91 +1,7 @@
 <template>
-   <h1>Create Event</h1>
-    <form action="" v-on:submit.prevent>
-    <div class="formelem">
-        <fieldset class="form-fieldset ui-input __first">
-            <input type="text" v-model="title" id="name"  tabindex="0" required/>
-            <label for="name">
-                <span data-text="Name">Name</span>
-            </label>
-        </fieldset>
-    </div>
-
-    <div class="formelem">
-        <div class="datepicker-holder">
-        <fieldset class="form-fieldset ui-input __first">
-            <input type="text" v-model="testTime" id="starttime"  tabindex="0" />
-
-            <label for="starttime">
-                <span data-text="Start time">Start time</span>
-            </label>
-        </fieldset>
-        <date-picker id="starttime" :time.sync="testTime" :option="timeoption"></date-picker>
-        </div>
-    </div>
-
-    <div class="formelem">
-        <fieldset class="form-fieldset ui-input __first">
-            <input type="text" v-model="meetingpoint" id="meetingpoint"  tabindex="0" />
-            <label for="name">
-                <span data-text="Meeting point">Meeting Point</span>
-            </label>
-        </fieldset>
-    </div>
-
-    <div class="formelem">
-        <fieldset class="form-fieldset ui-input __first">
-            <input type="text" v-model="description" id="desc"  />
-            <label for="desc">
-                <span data-text="description">description</span>
-            </label>
-        </fieldset>
-    </div>
-
-    <div class="formelem">
-        <div class="title halfgrey">TYPE</div>
-
-        <multiselect multiple :options="typeOptions" :selected="selectedType"></multiselect>
-    </div>
-
-    <div class="formelem">
-        <div class="route">
-            <div class="title halfgrey">ROUTE</div>
-            <map-item v-if="selectedRoute"
-                      class="mapitem"
-                      :item="selectedRoute">
-            </map-item>
-            <div>
-                <modal :selectedroute.sync="selectedRoute" :show.sync="showModal"></modal>
-                <button id="show-modal" @click="showModal = true">Select Route</button>
-            </div>
-        </div>
-    </div>
-
-        <div class="formelem">
-            <div class="imageupload">
-               <image-uploader></image-uploader>
-            </div>
-        </div>
-
-
-    <div class="formelem">
-        <div class="invite">
-            <div class="title halfgrey">PARTICIPANTS</div>
-            <div class="participant" v-for="p in participants"><span>{{p.firstname}}</span></div>
-            <participants-modal  :selectedathletes.sync="participants" :show.sync="showAthleteModal"></participants-modal>
-            <button  @click="showAthleteModal = true">Invite Friends</button>
-        </div>
-    </div>
-
-    <div class="formelem">
-        <span>Private</span>
-        <input type="checkbox" v-model="isPrivate">
-    </div>
-
-    <div class="submit-row">
-        <button @click="saveEvent" type="submit">Submit</button>
-    </div>
-    </form>
+   <h1>Event details</h1>
+   {{event.description}}
+   {{event}}
 </template>
 
 
@@ -99,7 +15,6 @@
     import MapItem from "./MapItem.vue";
     import vSelect from "vue-select"
     import Multiselect from 'vue-multiselect'
-    import ImageUploader from './ImageUploader.vue'
 
 
    export default {
@@ -112,12 +27,29 @@
             ParticipantsModal,
             MapItem,
             vSelect,
-            Multiselect,
-            ImageUploader
+            Multiselect
         },
+
+
+
+       route: {
+           data (transition) {
+               this.apiURL = Config.API_URL + "events/" + this.$route.params.id;
+
+               this.$http.get(this.apiURL, function (results, status, request) {
+
+                   console.log(results)
+                   transition.next({event: results});
+
+               }).error(function (data, status, request) {
+                   throw (data);
+               })
+           }
+       },
 
         data () {
             return {
+                event: null,
                 title: null,
                 type: null,
                 description: null,

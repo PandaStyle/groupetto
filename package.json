@@ -40,6 +40,7 @@
     "zip-dir": "^1.0.2"
   },
   "dependencies": {
+    "cloudinary": "^1.4.1",
     "cookies-js": "^1.2.2",
     "hapi": "^11.1.2",
     "inert": "^3.2.0",
@@ -50,8 +51,10 @@
     "strava-v3": "^1.10.0",
     "vue": "^1.0.8",
     "vue-mdl": "^0.9.4",
+    "vue-multiselect": "^1.1.2",
     "vue-resource": "^0.1.17",
     "vue-router": "^0.7.5",
+    "vue-select": "github:sagalbot/vue-select",
     "vuex": "^0.6.2"
   }
 }

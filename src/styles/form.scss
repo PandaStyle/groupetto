@@ -1,3 +1,5 @@
+@import "globals";
+
 .ui-input {
   position: relative;
   padding: 0;
@@ -153,3 +155,22 @@
     transform: translate3d(0, 0, 0);
   }
 }
+
+.multiselect {
+  margin-top: 20px;
+}
+
+.multiselect__tag {
+  background: $salomon !important;
+}
+
+.route {
+
+  .mapitem {
+    width: 100%;
+    margin-top: 20px;
+  }
+
+}
+
+

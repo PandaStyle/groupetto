@@ -16,6 +16,7 @@ import MapItem from './components/MapItem.vue'
 
 import Events from './components/Events.vue'
 import CreateEvent from './components/CreateEvent.vue'
+import EventDetails from './components/EventDetails.vue'
 import EventItem from './components/EventItem.vue'
 
 Vue.use(Router);
@@ -34,11 +35,14 @@ router.map({
   '/strava': {
     component: document.cookie.indexOf("strava_access_token") >= 0 ? StravaMain : StravaLogin
   },
+  '/events': {
+    component: Events
+  },
   '/events/create': {
     component: CreateEvent
   },
-  '/events': {
-    component: Events
+  '/events/:id': {
+    component: EventDetails
   }
 });
 
