@@ -1,6 +1,6 @@
 <template >
    <navbar></navbar>
-   <div class="container {{this.$route.name}}">
+   <div class="container">
       <router-view></router-view>
    </div>
 </template>

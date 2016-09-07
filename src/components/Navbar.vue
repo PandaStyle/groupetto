@@ -1,5 +1,5 @@
 <template>
-    <div class="sidebar" v-bind:class="{'open': isMenuOpen, 'wide': isMenuWide }">
+    <div class="sidebar" v-bind:class="{'open': isMenuOpen, 'hidden': $route.path == '/login',  'wide': isMenuWide }">
 
         <div class="logo-wrapper" v-bind:class="{'active' : isMenuOpen }">
            <logo></logo>
@@ -46,6 +46,10 @@
             Logo
         },
 
+        ready () {
+            console.log(this.$route.path)
+        },
+
         computed: {
             isMenuOpen () {
                 return store.state.isMenuOpen
@@ -67,4 +71,8 @@
 
 <style lang="sass">
 @import "../styles/sidebar.scss";
+
+    .hidden {
+        display: none;
+    }
 </style>
