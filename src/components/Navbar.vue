@@ -10,15 +10,15 @@
         </div>
         <div class="item content">
             <div class="menu" v-show="!isMenuOpen">
-                <a @click="trackMenuclick('News')" class="menu-item news" v-link="{ path: '/' }">
+                <a  class="menu-item news" v-link="{ path: '/' }">
                     <div class="menu-icon flaticon-order fi"></div>
                     <span class="menu-title">All rides</span>
                 </a>
-                <a @click="trackMenuclick('Inspiration')" class="menu-item insp" v-link="{ path: '/create' }">
+                <a  class="menu-item insp" v-link="{ path: '/create' }">
                   <span class="menu-icon flaticon-add-place  fi"></span>
                     <span class="menu-title">Create new</span>
                 </a>
-                <a @click="trackMenuclick('Instagram')" class="menu-item instagram" v-link="{ path: '/myrides' }">
+                <a s class="menu-item instagram" v-link="{ path: '/myrides' }">
                     <span class="menu-icon flaticon-user-1 fi"></span>
                     <span class="menu-title">My rides</span>
                 </a>
