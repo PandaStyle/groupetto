@@ -1,5 +1,6 @@
 <template>
-   <h1>Create Event</h1>
+    <div class="create">
+   <h1>Create New Gruppetto</h1>
     <form action="" v-on:submit.prevent>
     <div class="formelem">
         <fieldset class="form-fieldset ui-input __first">
@@ -69,28 +70,15 @@
             </div>
         </div>
 
-
-    <div class="formelem invite">
-
-            <div class="title halfgrey">INVITE FRIENDS</div>
-            <div class="participant" v-for="p in participants"><span>{{p.firstname}}</span></div>
-            <participants-modal  :selectedathletes.sync="participants" :show.sync="showAthleteModal"></participants-modal>
-                <label class="glyph-icon flaticon-user" @click="showAthleteModal = true">
-
-                </label>
-
-
-    </div>
-
-    <div class="formelem">
-        <span>Private</span>
-        <input type="checkbox" v-model="isPrivate">
-    </div>
-
-    <div class="submit-row">
+    <div class="submit-row" style="width: 614px;
+    text-align: center;
+    float: left;
+    margin: 40px auto;
+    display: inline-block;">
         <button @click="saveEvent" type="submit">Create Ride</button>
     </div>
     </form>
+    </div>
 </template>
 
 
@@ -200,7 +188,6 @@
 
             saveEvent () {
                 var event = {
-                    creatorId: '1234',
                     title: this.title,
                     date: this.testTime,
                     description: this.description,
@@ -209,7 +196,8 @@
                     participants: this.participants,
                     private: this.isPrivate,
                     route: this.selectedRoute,
-                    image: this.image
+                    image: this.image,
+                    type: this.selectedType
                 }
 
                 this.$http.post(Config.API_URL + 'events', event, results => {

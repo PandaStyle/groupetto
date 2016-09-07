@@ -146,7 +146,12 @@ server.route({
     path:'/strava/me',
     handler: function (request, reply) {
         console.log(request.state)
+        strava.athlete.get({'access_token': request.state.strava_access_token},function(err,res) {
+            if(err)
+                throw err
 
+            reply(res);
+        });
     }
 });
 
@@ -253,24 +258,39 @@ server.route({
     path:'/events',
 
     handler:  (request, reply) => {
+        strava.athlete.get({'access_token': request.state.strava_access_token},function(err,res) {
+
             var eventObj = request.payload;
 
-            cloudinary.uploader.upload(request.payload.image, function (result) {
-            if(result.error){
-                console.error(result.error)
+            if(!err) {
+                var me = {
+                    id: res.id,
+                    name: res.firstname + " " + res.lastname,
+                    profile_medium: res.profile_medium
+                }
             }
 
-            eventObj.imageUrl = result.url;
-            var event = new Event(eventObj)
+            if(me){
+                eventObj.creator = me;
+            }
 
-            event.save((err, resp) => {
-                if (err) {
-                    return reply(err);
+            cloudinary.uploader.upload(request.payload.image, function (result) {
+                if(result.error){
+                    console.error(result.error)
                 }
-                reply(resp);
-            });
-        });
 
+                eventObj.imageUrl = result.url;
+                var event = new Event(eventObj)
+
+                event.save((err, resp) => {
+                    if (err) {
+                        return reply(err);
+                    }
+                    reply(resp);
+                });
+            });
+
+        })
     }
 });
 

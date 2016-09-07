@@ -6,6 +6,7 @@ var Schema = mongoose.Schema;
 var eventSchema = new Schema({
     creatorName: String,
     creatorId: Number,
+    creator: Object,
     title: { type: String, required: true },
     date: { type: Date, default: Date.now },
     description: String,

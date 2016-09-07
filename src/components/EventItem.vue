@@ -4,7 +4,7 @@
         <div class="tile-image"><img v-bind:src="item.imageUrl" alt=""/></div>
         <header>
             <a class="title" href="{{item.title}}" target="_blank">{{item.title}}</a>
-            <div class="subtitle">by {{item.creatorId}}</div>
+            <div class="subtitle">by <a class="creatorlink" href="https://www.strava.com/athletes/{{item.creator.id}}" target="_blank">{{item.creator.name}}</a></div>
             <div class="info">
                 <span class="icon flaticon-compass"></span><span class="text">{{item.route.name}}</span>
                 <span class="icon flaticon-calendar"></span><span class="text">{{humanizedDate}}</span>
@@ -20,7 +20,12 @@
                 <a @click="shareItemClick(item.title, 'mail')" target="_blank" href="mailto:?Subject=From Velopedia: {{item.title}}&Body=Check%20this%20out%20 {{item.link}}" class="share linkedin icon-paper-plane" v-show="isShareActive"></a>
             </div>
 
-            <button class="join" @click="join" data-id="{{item._id}}">Join Ride</button>
+            <span class="already" v-if="isOrganizer">You organized</span>
+
+            <span class="already" v-if="hasJoined">You are going!</span>
+
+            <button class="join"  @click="join" data-id="{{item._id}}" v-if="!hasJoined && !isOrganizer">Join Ride</button>
+
             <button class="viewmore" @click="detailClick">details</button>
         </header>
     </div>
@@ -31,6 +36,7 @@
     import img from '../directives/img'
     import MapItem from "./MapItem.vue";
     import moment from "moment";
+    import _ from "lodash";
 
     export default {
         name: 'EventItem',
@@ -40,13 +46,16 @@
         },
 
         props: {
-            item: Object
+            item: Object,
+            userid: Number
         },
 
         data () {
             return {
                 humanizedDate: moment(this.item.date).format('MMM D, h:mm a'),
-                isShareActive: false
+                isShareActive: false,
+                hasJoined: _.find(this.item.participants, {id: this.userid}),
+                isOrganizer: this.item.creator.id === this.userid
             }
         },
 

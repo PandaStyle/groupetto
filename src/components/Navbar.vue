@@ -3,34 +3,29 @@
 
         <div class="logo-wrapper" v-bind:class="{'active' : isMenuOpen }">
            <logo></logo>
+            <img class="g-text" style="    position: absolute;
+    width: 120px;
+    top: 21px;
+    left: 65px;" src="../img/groupettp-name.png" alt="">
         </div>
         <div class="item content">
             <div class="menu" v-show="!isMenuOpen">
-                <a @click="trackMenuclick('News')" class="menu-item news" v-link="{ path: '/news' }">
-                    <div class="menu-icon flaticon-rss fi"></div>
-                    <span class="menu-title">News</span>
+                <a @click="trackMenuclick('News')" class="menu-item news" v-link="{ path: '/' }">
+                    <div class="menu-icon flaticon-order fi"></div>
+                    <span class="menu-title">All rides</span>
                 </a>
-                <a @click="trackMenuclick('Inspiration')" class="menu-item insp" v-link="{ path: '/inspiration' }">
-                  <span class="menu-icon flaticon-tumblr tumblr-1 fi"></span>
-                    <span class="menu-title">Tumblr</span>
+                <a @click="trackMenuclick('Inspiration')" class="menu-item insp" v-link="{ path: '/create' }">
+                  <span class="menu-icon flaticon-add-place  fi"></span>
+                    <span class="menu-title">Create new</span>
                 </a>
-                <a @click="trackMenuclick('Instagram')" class="menu-item instagram" v-link="{ path: '/instagram' }">
-                    <span class="menu-icon flaticon-social fi"></span>
-                    <span class="menu-title">Instagram</span>
+                <a @click="trackMenuclick('Instagram')" class="menu-item instagram" v-link="{ path: '/myrides' }">
+                    <span class="menu-icon flaticon-user-1 fi"></span>
+                    <span class="menu-title">My rides</span>
                 </a>
             </div>
 
             <div class="menu" v-show="isMenuOpen" transition="expand">
                 <menu-container v-bind:active="isMenuOpen"></menu-container>
-            </div>
-        </div>
-        <div class="burger" v-bind:class="{'active' : isMenuOpen }" @click="toggleMenu">
-            <div class="col">
-                <div class="con">
-                    <div class="bar arrow-top-r"></div>
-                    <div class="bar arrow-middle-r"></div>
-                    <div class="bar arrow-bottom-r"></div>
-                </div>
             </div>
         </div>
     </div>

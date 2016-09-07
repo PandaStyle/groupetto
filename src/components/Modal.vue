@@ -2,7 +2,6 @@
     <div class="modal-mask" @click="close" v-show="show" transition="modal">
         <div class="modal-container" @click.stop>
             <div class="modal-header">
-                <h3>Select you route</h3>
             </div>
 
             <div class="modal-body">
@@ -29,11 +28,6 @@
 
             </div>
 
-            <div class="modal-footer text-right">
-                <button class="modal-default-button" @click="savePost()">
-                    Save
-                </button>
-            </div>
         </div>
     </div>
 </template>
@@ -117,7 +111,7 @@
     }
 
     .modal-container {
-        width: 800px;
+        width: 620px !important;
         max-height: 80vh;
         overflow: auto;
         margin: 40px auto 0;

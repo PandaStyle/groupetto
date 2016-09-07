@@ -6,6 +6,7 @@
   <event-item
             class="even"
             v-for="item in items"
+            :userid="me.id"
             :item="item">
     </event-item>
       </div>
@@ -33,7 +34,8 @@
 
         data () {
             return {
-                items: null
+                items: null,
+                me: null
             }
         },
 
@@ -44,7 +46,11 @@
                 this.$http.get(this.apiURL, function (results, status, request) {
 
                     console.log(results)
-                    transition.next({items: results});
+
+                    this.$http.get(Config.API_URL + "strava/me", function (r) {
+                        console.log(r)
+                        transition.next({items: results, me: r});
+                    })
 
                 }).error(function (data, status, request) {
                     throw (data);

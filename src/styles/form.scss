@@ -160,6 +160,11 @@ form {
   max-width: 600px;
 }
 
+.create {
+  margin: 0 auto;
+  max-width: 600px;
+}
+
 .event-list {
   margin-left: 100px;
 }
@@ -168,7 +173,9 @@ form {
   position: absolute;
   top:0;
   width: 100%;
+  font-family: 'sofia_prolight' !important;
 }
+
 
 .cov-datepicker {
   height: 54px;
@@ -220,13 +227,13 @@ form {
 .route {
 
   .mapitem {
-    width: 100%;
-    margin-top: 15px;
-    margin-bottom: 15px;
+
+    width: 580px;
+    margin: 15px auto;
 
 
     .name {
-      font-size: 28px;
+      font-size: 24px;
     }
   }
 
@@ -240,5 +247,17 @@ form {
   height: 1px;
   margin: 20px;
   background-color: #f7f7f7;;
+}
+
+.hour-box .active, .min-box .active[_v-c94f6c16] {
+  background: $salomon !important;
+}
+
+.cov-picker-box,
+.cov-picker-box .day
+.cov-picker-box .week,
+.cov-date-caption,
+.button-box{
+  font-family: 'sofia_prolight' !important;
 }
 

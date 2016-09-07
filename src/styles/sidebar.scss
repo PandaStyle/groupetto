@@ -16,6 +16,10 @@
   flex-direction: column;
   align-content: flex-start;
 
+  .g-text { @include defaulttransition();
+    opacity: 0;
+  }
+
   &:hover {
     width: 250px;
 
@@ -24,9 +28,15 @@
       width: 250px;
     }
 
-    .sidebar .item.content .menu .menu-item .menu-title {
+    .sidebar .item.content .menu .menu-item .menu-title, .g-text {
       opacity: 1;
     }
+
+    .menu-title {
+      opacity: 1 !important;
+      padding-left: 70px;
+    }
+
   }
 
   .logo-wrapper {
@@ -93,11 +103,12 @@
 
           border-left: 3px solid $sidebar-grey;
 
-          line-height: 40px;
+          line-height: 32px;
 
-          margin-bottom: 10px;
+          margin-bottom: 5px;
 
           .menu-icon {
+            @include defaulttransition();
             float: left;
             color: $menu-item-grey;
             font-size: 30px;
@@ -105,8 +116,9 @@
           }
 
           .menu-title {
+
             //text-transform: uppercase;
-            font-family: "Futura", sans-serif;
+            font-family: 'sofia_prolight';
             font-size: 20px;
             color: white !important;
             //font-weight: bold;
@@ -116,36 +128,17 @@
             top: 13px;
             opacity: 0;
             color: #444;
+            width: 200px;
+            text-align: left;
           }
 
-          &:hover {
-            @include defaulttransition();
-           // background-color: $salomon;
-            background-image: $gradient;
-            border-color: $salomon;
-            width: 160px;
 
-            .menu-title {
-              transition-delay: .2s;
-              opacity: 1;
-              left: 80px;
-            }
-
-            .menu-icon {
-              color: white;
-            }
-          }
-
-          &.insp:hover {
-            width:170px;
-          }
-
-          &.v-link-active {
-            border-color: $salomon;
-            .menu-icon {
-              color: #fff;
-            }
-          }
+&:hover {
+  .menu-icon{
+    color: #fff;
+  }
+} 
+          
 
           &.instagram:hover {
             width:200px;
@@ -186,6 +179,8 @@
       opacity: .5;
     }
   }
+
+
 
 }
 
