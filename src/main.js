@@ -32,18 +32,19 @@ var router = new Router({
 });
 
 router.map({
+  '/:id': {
+    component: EventDetails
+  },
   '/login': {
     component: StravaLogin
   },
   '/': {
     component: Events
   },
-  '/events/create': {
+  '/create': {
     component: CreateEvent
-  },
-  '/events/:id': {
-    component: EventDetails
   }
+
 });
 
 router.beforeEach((transition) => {

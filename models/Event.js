@@ -4,7 +4,8 @@ mongoose.Promise = require('bluebird');
 var Schema = mongoose.Schema;
 
 var eventSchema = new Schema({
-    creatorId: String,
+    creatorName: String,
+    creatorId: Number,
     title: { type: String, required: true },
     date: { type: Date, default: Date.now },
     description: String,
@@ -13,8 +14,7 @@ var eventSchema = new Schema({
     participants: [],
     private: Boolean,
     route: Object,
-
-
+    imageUrl: String
 });
 
 var Event = mongoose.model('Event', eventSchema);

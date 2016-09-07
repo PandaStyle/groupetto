@@ -1,7 +1,45 @@
 <template>
-   <h1>Event details</h1>
-   {{event.description}}
-   {{event}}
+   <div class="container details">
+
+      <img class="eventimage" v-bind:src="event.imageUrl" alt="">
+      <h2>{{event.title}}</h2>
+
+
+      <span class="icon flaticon-user-1"></span><span class="text">{{event.creatorId}}</span>
+
+      <div class="row">
+         <span class="icon flaticon-compass"></span><span class="text">{{event.route.name}}</span>
+         <span class="icon flaticon-calendar"></span><span class="text">{{humanizedDate}}</span>
+         <span class="icon flaticon-pin"></span><span class="text">{{event.meetingPoint}}</span>
+         <span v-if="item.type" class="icon flaticon-bicycle-1"></span><span class="text">{{event.type}}</span>
+      </div>
+
+      <div class="desc">{{event.description}}</div>
+
+      <div class="separator"></div>
+
+      <div class="text-title">ROUTE</div>
+
+      <map-item v-if="event.route"
+                class="mapitem"
+                :item="event.route">
+      </map-item>
+
+      <div class="separator"></div>
+
+      <div class="text-title">PEOPLE JOINED</div>
+      <div style="width: 600px; margin: 20px auto">
+         <div style="float: left;"  v-for="p in event.participants">
+            <div class="profile" v-bind:style="{ backgroundImage: 'url(' + p.profile_medium + ')' }"></div>
+         </div>
+      </div>
+
+      <div class="cta" style="width: 100%; float: left;" >
+         <button>JOIN</button>
+         <a class="back" href="/#/">or go back</a>
+      </div>
+
+   </div>
 </template>
 
 
@@ -15,20 +53,23 @@
     import MapItem from "./MapItem.vue";
     import vSelect from "vue-select"
     import Multiselect from 'vue-multiselect'
+    import moment from "moment";
 
 
    export default {
-        name: 'CreateEvent',
+
+      name: 'EventDetails',
 
         components: {
-            EventItem,
-            'date-picker': myDatepicker,
-            Modal,
-            ParticipantsModal,
-            MapItem,
-            vSelect,
-            Multiselect
+            MapItem
         },
+
+      data () {
+         return {
+            event: null,
+            humanizedDate: moment(event.date).format('MMM D, h:mm a'),
+         }
+      },
 
 
 
@@ -47,77 +88,7 @@
            }
        },
 
-        data () {
-            return {
-                event: null,
-                title: null,
-                type: null,
-                description: null,
-                isPrivate: null,
-                meetingpoint: null,
-                participants: [],
-                selectedRoute: null,
-                selectedType: null,
-                typeOptions: ['training','groupride','tempo', 'intervals', 'coffee ride',  'leasure', 'hammer', 'drop', 'no-drop'],
-                showModal: false,
-                showAthleteModal: false,
 
-
-                dataPropWithPlaceString: "",
-                starttime: '',
-                endtime: '2016-01-19',
-                testTime: '',
-                multiTime: '',
-                option: {
-                    type: 'day',
-                    week: ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'],
-                    month: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-                    format: 'YYYY-MM-DD',
-                    placeholder: 'when?',
-                    inputStyle: {
-                        'display': 'inline-block',
-                        'padding': '6px',
-                        'line-height': '22px',
-                        'font-size': '16px',
-                        'border': '2px solid #fff',
-                        'box-shadow': '0 1px 3px 0 rgba(0, 0, 0, 0.2)',
-                        'border-radius': '2px',
-                        'color': '#5F5F5F'
-                    },
-                    color: {
-                        header: '#ccc',
-                        headerText: '#f00'
-                    },
-                    buttons: {
-                        ok: 'Ok',
-                        cancel: 'Cancel'
-                    },
-                    overlayOpacity: 0.5, // 0.5 as default
-                    dismissible: true // as true as default
-                },
-                timeoption: {
-                    type: 'min',
-                    week: ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'],
-                    month: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-                    format: 'YYYY-MM-DD HH:mm'
-                },
-                multiOption: {
-                    type: 'multi-day',
-                    week: ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'],
-                    month: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-                    format:"YYYY-MM-DD HH:mm"
-                },
-                limit: [{
-                    type: 'weekday',
-                    available: [1, 2, 3, 4, 5]
-                },
-                    {
-                        type: 'fromto',
-                        from: '2016-02-01',
-                        to: '2016-02-20'
-                    }]
-            }
-        },
 
         methods: {
             loadMore () {
@@ -149,44 +120,9 @@
 
 <style lang="sass">
     @import '../styles/form.scss';
-    .event-list {
-        margin-left: 100px;
-    }
-
-.cov-vue-date {
-    position: absolute;
-    top:0;
-    width: 100%;
-}
-
-.cov-datepicker {
-    height: 54px;
-    width: 100%;
-    z-index: 10;
-    border: none;
-    font-size: 24px;
-    color: black;
-}
-    
-    .datepicker-holder {
-        position: relative;
+    @import '../styles/deatils.scss';
 
 
-    }
-
-    .halfgrey {
-        font-size: 14px;
-        position: relative;
-        color: rgba(0, 0, 0, 0.5);
-        transition: color 300ms cubic-bezier(0.215, 0.61, 0.355, 1);
-    }
-
-    .formelem {
-        float: left;
-        width: 100%;
-        margin-bottom: 20px;
-        padding: 10px;
-    }
 
     .staticmap {
         float: right !important;

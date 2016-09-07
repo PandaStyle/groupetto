@@ -7,8 +7,8 @@
 
             <div class="modal-body">
                <div class="menu">
-                   <span @click="setSelectedTab('myroutes')" class="myroutes">My Routes</span>
-                   <span @click="setSelectedTab('myactivities')" class="myactivities">My Activities</span>
+                   <span @click="setSelectedTab('myroutes')" v-bind:class="{'active': selectedTab == 'myroutes'}" class="myroutes">My Routes</span>
+                   <span @click="setSelectedTab('myactivities')" v-bind:class="{'active': selectedTab == 'myactivities'}" class="myactivities">My Activities</span>
                </div>
                <div class="routes">
                    <map-item v-show="selectedTab == 'myroutes'"
@@ -49,7 +49,7 @@
         },
         data () {
             return {
-                selectedTab: null,
+                selectedTab: 'myroutes',
                 myrouteitems: null,
                 myactivityitems: null,
                 title: '',
@@ -63,6 +63,7 @@
             },
             setSelectedRoute(item) {
                this.selectedroute = item;
+                this.show = false;
             },
             close: function () {
                 this.show = false;
@@ -166,5 +167,27 @@
     .modal-leave .modal-container {
         -webkit-transform: scale(1.1);
         transform: scale(1.1);
+    }
+
+    .myroutes.active {
+        color: #f16f55;
+    }
+    .myroutes {
+        cursor: pointer;
+        padding-right: 20px;
+        border-right: 2px solid black;
+    }
+    .myactivities.active {
+        color: #f16f55;
+
+    }
+    .myactivities {
+        cursor: pointer;
+        padding-left: 10px;
+    }
+    .menu {
+        margin: 10px auto;
+        font-size: 20px;
+        text-align: center;
     }
 </style>

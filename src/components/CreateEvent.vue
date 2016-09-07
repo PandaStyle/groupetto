@@ -3,7 +3,7 @@
     <form action="" v-on:submit.prevent>
     <div class="formelem">
         <fieldset class="form-fieldset ui-input __first">
-            <input type="text" v-model="title" id="name"  tabindex="0" required/>
+            <input type="text" v-model="title" id="name"  tabindex="0"/>
             <label for="name">
                 <span data-text="Name">Name</span>
             </label>
@@ -41,9 +41,10 @@
         </fieldset>
     </div>
 
-    <div class="formelem">
-        <div class="title halfgrey">TYPE</div>
+        <div class="separator"></div>
 
+    <div class="formelem type">
+        <div class="title halfgrey">TYPE</div>
         <multiselect multiple :options="typeOptions" :selected="selectedType"></multiselect>
     </div>
 
@@ -62,19 +63,23 @@
     </div>
 
         <div class="formelem">
+            <div class="title halfgrey">Select an image</div>
             <div class="imageupload">
-               <image-uploader></image-uploader>
+               <image-uploader :image.sync="image"></image-uploader>
             </div>
         </div>
 
 
-    <div class="formelem">
-        <div class="invite">
-            <div class="title halfgrey">PARTICIPANTS</div>
+    <div class="formelem invite">
+
+            <div class="title halfgrey">INVITE FRIENDS</div>
             <div class="participant" v-for="p in participants"><span>{{p.firstname}}</span></div>
             <participants-modal  :selectedathletes.sync="participants" :show.sync="showAthleteModal"></participants-modal>
-            <button  @click="showAthleteModal = true">Invite Friends</button>
-        </div>
+                <label class="glyph-icon flaticon-user" @click="showAthleteModal = true">
+
+                </label>
+
+
     </div>
 
     <div class="formelem">
@@ -83,7 +88,7 @@
     </div>
 
     <div class="submit-row">
-        <button @click="saveEvent" type="submit">Submit</button>
+        <button @click="saveEvent" type="submit">Create Ride</button>
     </div>
     </form>
 </template>
@@ -126,9 +131,10 @@
                 participants: [],
                 selectedRoute: null,
                 selectedType: null,
-                typeOptions: ['training','groupride','tempo', 'intervals', 'coffee ride',  'leasure', 'hammer', 'drop', 'no-drop'],
+                typeOptions: ['training','groupride', 'tempo', 'intervals', 'coffee ride', 'leasure', 'skill', 'hammer', 'tour', 'drop', 'no-drop'],
                 showModal: false,
                 showAthleteModal: false,
+                image: null,
 
 
                 dataPropWithPlaceString: "",
@@ -202,11 +208,13 @@
                     type: this.type,
                     participants: this.participants,
                     private: this.isPrivate,
-                    route: this.selectedRoute
+                    route: this.selectedRoute,
+                    image: this.image
                 }
 
                 this.$http.post(Config.API_URL + 'events', event, results => {
                     console.log(results.result)
+                    this.$router.go('/')
                 }).error( err => {
                     throw (err);
                 })
@@ -217,49 +225,6 @@
 
 <style lang="sass">
     @import '../styles/form.scss';
-    .event-list {
-        margin-left: 100px;
-    }
-
-.cov-vue-date {
-    position: absolute;
-    top:0;
-    width: 100%;
-}
-
-.cov-datepicker {
-    height: 54px;
-    width: 100%;
-    z-index: 10;
-    border: none;
-    font-size: 24px;
-    color: black;
-}
-    
-    .datepicker-holder {
-        position: relative;
-
-
-    }
-
-    .halfgrey {
-        font-size: 14px;
-        position: relative;
-        color: rgba(0, 0, 0, 0.5);
-        transition: color 300ms cubic-bezier(0.215, 0.61, 0.355, 1);
-    }
-
-    .formelem {
-        float: left;
-        width: 100%;
-        margin-bottom: 20px;
-        padding: 10px;
-    }
-
-    .staticmap {
-        float: right !important;
-    }
-
 
 
 </style>

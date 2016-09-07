@@ -103,6 +103,11 @@
 
 
 <style>
+    .add {
+        font-size: 14px;
+        padding: 10px 15px;
+    }
+
     .modal-mask {
         position: fixed;
         z-index: 9998;

@@ -35,23 +35,44 @@
   -webkit-font-smoothing: antialiased;
   font-smoothing: antialiased;
     }
+    .flaticon-bicycle:before { content: "\f100"; }
+    .flaticon-bicycle-1:before { content: "\f101"; }
+    .flaticon-calendar:before { content: "\f102"; }
+    .flaticon-compass:before { content: "\f103"; }
+    .flaticon-connection:before { content: "\f104"; }
+    .flaticon-distance:before { content: "\f105"; }
+    .flaticon-distance-1:before { content: "\f106"; }
+    .flaticon-envelope:before { content: "\f107"; }
+    .flaticon-facebook-logo-in-circular-button-outlined-social-symbol:before { content: "\f108"; }
+    .flaticon-locked:before { content: "\f109"; }
+    .flaticon-mac:before { content: "\f10a"; }
+    .flaticon-mountain-range:before { content: "\f10b"; }
+    .flaticon-phone:before { content: "\f10c"; }
+    .flaticon-picture:before { content: "\f10d"; }
+    .flaticon-picture-1:before { content: "\f10e"; }
+    .flaticon-pin:before { content: "\f10f"; }
+    .flaticon-twitter-bird-logo-outline:before { content: "\f110"; }
+    .flaticon-twitter-social-outlined-logo:before { content: "\f111"; }
+    .flaticon-user:before { content: "\f112"; }
+    .flaticon-user-1:before { content: "\f113"; }
 
-    .flaticon-instagram:before { content: "\f100"; }
-.flaticon-rss:before { content: "\f101"; }
-.flaticon-rss-1:before { content: "\f102"; }
-.flaticon-social:before { content: "\f103"; }
-.flaticon-social-media:before { content: "\f104"; }
-.flaticon-technology:before { content: "\f105"; }
-.flaticon-tumblr:before { content: "\f106"; }
-.flaticon-tumblr-logo:before { content: "\f107"; }
-.flaticon-tumblr-logo-1:before { content: "\f108"; }
-
-    $font-Flaticon-instagram: "\f100";
-    $font-Flaticon-rss: "\f101";
-    $font-Flaticon-rss-1: "\f102";
-    $font-Flaticon-social: "\f103";
-    $font-Flaticon-social-media: "\f104";
-    $font-Flaticon-technology: "\f105";
-    $font-Flaticon-tumblr: "\f106";
-    $font-Flaticon-tumblr-logo: "\f107";
-    $font-Flaticon-tumblr-logo-1: "\f108";
+    $font-Flaticon-bicycle: "\f100";
+    $font-Flaticon-bicycle-1: "\f101";
+    $font-Flaticon-calendar: "\f102";
+    $font-Flaticon-compass: "\f103";
+    $font-Flaticon-connection: "\f104";
+    $font-Flaticon-distance: "\f105";
+    $font-Flaticon-distance-1: "\f106";
+    $font-Flaticon-envelope: "\f107";
+    $font-Flaticon-facebook-logo-in-circular-button-outlined-social-symbol: "\f108";
+    $font-Flaticon-locked: "\f109";
+    $font-Flaticon-mac: "\f10a";
+    $font-Flaticon-mountain-range: "\f10b";
+    $font-Flaticon-phone: "\f10c";
+    $font-Flaticon-picture: "\f10d";
+    $font-Flaticon-picture-1: "\f10e";
+    $font-Flaticon-pin: "\f10f";
+    $font-Flaticon-twitter-bird-logo-outline: "\f110";
+    $font-Flaticon-twitter-social-outlined-logo: "\f111";
+    $font-Flaticon-user: "\f112";
+    $font-Flaticon-user-1: "\f113";

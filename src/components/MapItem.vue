@@ -2,17 +2,15 @@
     <div class="mapitem">
 
         <img class="staticmap" v-bind:src="mapUrl" />
-        <img class="profile-img" v-bind:src="profileImage" />
         <div class="numbers">
             <div class="name">{{item.name}}</div>
-            <div class="distance">{{distance}} km</div>
-            <div class="elevation"><span class="icon icon-mountains"></span>{{item.total_elevation_gain}} m</div>
-            <div class="kudos_count"><span class="icon icon-like"></span>{{item.kudos_count}}</div>
+            <div class="prop distance"><span  class="icon flaticon-distance"></span>{{distance}} km</div>
+            <div class="prop elevation"><span class="icon flaticon-mountain-range"></span>{{item.elevation_gain ? item.elevation_gain.toFixed(1) : item.total_elevation_gain.toFixed(1)}} m</div>
         </div>
     </div>
 </template>
 
-<script type="text/babel">
+<script type="text/babel">e
     import img from '../directives/img'
 
     export default {
@@ -77,6 +75,7 @@
 <style lang="sass">
     @import "../styles/stravaitem.scss";
     @import "../styles/mapitem.scss";
+
 
 </style>
 

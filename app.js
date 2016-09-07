@@ -146,15 +146,7 @@ server.route({
     path:'/strava/me',
     handler: function (request, reply) {
         console.log(request.state)
-        strava.athlete.get({'access_token': request.state.strava_access_token},function(err,payload) {
-            if(!err) {
-                reply(payload);
-            }
-            else {
-                console.error(err);
-                throw err;
-            }
-        });
+
     }
 });
 
@@ -218,19 +210,67 @@ server.route({
     }
 });
 
+server.route({
+    method: 'POST',
+    path:'/join',
+
+    handler:  (request, reply) => {
+        //get me
+        var eventId = request.payload.eventId;
+
+        strava.athlete.get({'access_token': request.state.strava_access_token},function(err,res) {
+            if(!err) {
+                var me = {
+                    id: res.id,
+                    name: res.firstname + " " + res.lastname,
+                    profile_medium: res.profile_medium
+                }
+
+
+                Event.findByIdAndUpdate(eventId, { $push: { participants: me }},  {safe: true, upsert: false}, function (err, result) {
+                    if (err) {
+                        console.log(err)
+                        throw (err);
+                    }
+                    reply(result);
+                });
+
+            }
+            else {
+                console.error(err);
+                throw err;
+            }
+        });
+
+      //  vvar eventId
+
+    }
+});
+
 
 server.route({
     method: 'POST',
     path:'/events',
 
     handler:  (request, reply) => {
-        var event = new Event(request.payload);
-        event.save((err, resp) => {
-            if (err) {
-                return reply(err);
+            var eventObj = request.payload;
+
+            cloudinary.uploader.upload(request.payload.image, function (result) {
+            if(result.error){
+                console.error(result.error)
             }
-            reply(resp);
+
+            eventObj.imageUrl = result.url;
+            var event = new Event(eventObj)
+
+            event.save((err, resp) => {
+                if (err) {
+                    return reply(err);
+                }
+                reply(resp);
+            });
         });
+
     }
 });
 

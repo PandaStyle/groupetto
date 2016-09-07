@@ -25,20 +25,24 @@
 <style lang="sass" scoped>
 
     .athleteItem {
+        width:100%;
         margin-top: 10px;
         margin-bottom: 10px;
     }
 
     .profile-img {
+        width: 50px;
         float: left;
-        margin-right: 10px;
+        margin-right: 20px;
     }
 
     .name {
+        font-size: 16px;
         display: inline-block;
     }
 
     button.add {
+
         display: inline-block;
         margin: 10px;
     }
