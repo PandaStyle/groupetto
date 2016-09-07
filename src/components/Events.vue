@@ -1,8 +1,6 @@
 <template >
     <div class="event-list">
 
-
-   <h1>List Events</h1>
   <event-item
             class="even"
             v-for="item in items"
