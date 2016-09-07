@@ -66,9 +66,6 @@
                 store.dispatch('TOGGLE_MENU')
             },
 
-            trackMenuclick(menuitem) {
-                mixpanel.track( menuitem + "Menu Click");
-            }
         }
     }
 </script>

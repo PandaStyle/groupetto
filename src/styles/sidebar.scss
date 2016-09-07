@@ -16,7 +16,21 @@
   flex-direction: column;
   align-content: flex-start;
 
+  &:hover {
+    width: 250px;
+
+    .logo-wrapper {
+
+      width: 250px;
+    }
+
+    .sidebar .item.content .menu .menu-item .menu-title {
+      opacity: 1;
+    }
+  }
+
   .logo-wrapper {
+    @include defaulttransition();
     z-index: 1000;
     width: 70px;
     height: 70px;

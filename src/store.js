@@ -20,7 +20,7 @@ const actions = {
 
 const mutations = {
     [TOGGLE_MENU] (state){
-        mixpanel.track("Menu toggled");
+        //mixpanel.track("Menu toggled");
 
         state.isMenuOpen = !state.isMenuOpen
 
@@ -29,7 +29,7 @@ const mutations = {
     },
 
     [TOGGLE_MENU_WIDE] (state){
-        mixpanel.track("Menu wide toggled");
+       //a mixpanel.track("Menu wide toggled");
 
         state.isMenuWide = !state.isMenuWide
     }
